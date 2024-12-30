@@ -61,4 +61,22 @@ class Category
         $categoryId = $this->mysqli->real_escape_string($categoryId);
         $this->mysqli->query("DELETE FROM categories WHERE CategoryID=$categoryId");
     }
+
+    public function getPaginated($page, $limit)
+    {
+        $offset = ($page - 1) * $limit;
+        $stmt = $this->mysqli->prepare("SELECT * FROM categories LIMIT ? OFFSET ?");
+        $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTotal()
+    {
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM categories");
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
 }

@@ -68,4 +68,22 @@ class Product
         $productId = $this->mysqli->real_escape_string($productId);
         $this->mysqli->query("DELETE FROM products WHERE ProductID=$productId");
     }
+
+    public function getPaginated($page, $limit)
+    {
+        $offset = ($page - 1) * $limit;
+        $stmt = $this->mysqli->prepare("SELECT * FROM products LIMIT ? OFFSET ?");
+        $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTotal()
+    {
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM products");
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
 }

@@ -26,5 +26,9 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php
+    // Bao gồm chỉ một lần duy nhất
+    include_once(__DIR__ . '/../pagination.php');
+    ?>
 <?php $content = ob_get_clean(); ?>
 <?php include(__DIR__ . '/../layouts/layout.php'); ?>

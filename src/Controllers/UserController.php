@@ -16,8 +16,22 @@ class UserController extends Controller
 
     public function index(){
         // if (empty($_SESSION['currentUser'])) return header("Location: ../user/signin");
-        $customers = $this->userModel->getAllUsers();
-        $this->render('users\index', ['customers' => $customers]);
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 2; // Số bản ghi mỗi trang
+
+        // Gọi model để lấy dữ liệu và tổng số bản ghi
+        $customers = $this->userModel->getPaginatedUsers($page, $limit);
+        $totalUsers = $this->userModel->getTotalUsers();
+
+        // Tính toán số trang
+        $totalPages = ceil($totalUsers / $limit);
+
+        // Gửi dữ liệu tới view
+        $this->render('users/index', [
+            'customers' => $customers,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ]);
     }
 
     public function show($userId)
@@ -68,7 +82,7 @@ class UserController extends Controller
 
     public function update($userId)
     {
-        if (empty($_SESSION['currentUser'])) return header("Location: /user/login");
+        if (empty($_SESSION['currentUser'])) return header("Location: /auth/login");
         // Handle form submission to update a user
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processFormUpdate($userId);            

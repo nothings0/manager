@@ -77,4 +77,22 @@ class Employee
 
         return $result->fetch_assoc();
     }
+
+    public function getPaginated($page, $limit)
+    {
+        $offset = ($page - 1) * $limit;
+        $stmt = $this->mysqli->prepare("SELECT * FROM employees LIMIT ? OFFSET ?");
+        $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTotal()
+    {
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM employees");
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
 }

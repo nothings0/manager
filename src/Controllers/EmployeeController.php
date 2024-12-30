@@ -19,8 +19,25 @@ class EmployeeController extends Controller
 
     public function index(){
         // if (empty($_SESSION['currentEmployee'])) return header("Location: ../employee/signin");
-        $employees = $this->employeeModel->getAllEmployees();
-        $this->render('employees\index', ['employees' => $employees]);
+        // $employees = $this->employeeModel->getAllEmployees();
+        // $this->render('employees\index', ['employees' => $employees]);
+
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 2; // Số bản ghi mỗi trang
+
+        // Gọi model để lấy dữ liệu và tổng số bản ghi
+        $customers = $this->employeeModel->getPaginated($page, $limit);
+        $totalUsers = $this->employeeModel->getTotal();
+
+        // Tính toán số trang
+        $totalPages = ceil($totalUsers / $limit);
+
+        // Gửi dữ liệu tới view
+        $this->render('employees/index', [
+            'employees' => $customers,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ]);
     }
 
     public function create()

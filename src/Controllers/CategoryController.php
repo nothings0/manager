@@ -16,8 +16,24 @@ class CategoryController extends Controller
 
     public function index(){
         // if (empty($_SESSION['currentCategory'])) return header("Location: ../category/signin");
-        $categories = $this->categoryModel->getAllCategories();
-        $this->render('categories\index', ['categories' => $categories]);
+        // $categories = $this->categoryModel->getAllCategories();
+        // $this->render('categories\index', ['categories' => $categories]);
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 2; // Số bản ghi mỗi trang
+
+        // Gọi model để lấy dữ liệu và tổng số bản ghi
+        $customers = $this->categoryModel->getPaginated($page, $limit);
+        $totalUsers = $this->categoryModel->getTotal();
+
+        // Tính toán số trang
+        $totalPages = ceil($totalUsers / $limit);
+
+        // Gửi dữ liệu tới view
+        $this->render('categories/index', [
+            'categories' => $customers,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ]);
     }
 
     public function create()
