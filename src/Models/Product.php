@@ -25,6 +25,7 @@ class Product
 
     public function getAllProducts()
     {
+        // Nếu có tìm kiếm
         if (!empty($_GET['keyword'])) {
             $keyword = $this->mysqli->real_escape_string($_GET['keyword']);
             $result = $this->mysqli->query("SELECT * FROM products WHERE ProductName LIKE '%$keyword%'");
