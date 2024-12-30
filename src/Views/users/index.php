@@ -3,12 +3,15 @@
         <h1>Quản lý khách hàng</h1>
         <a href="/user/create" class="my-2 btn btn-success">Thêm khách hàng</a>
     </div>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-secondary" type="button" id="button-addon2">
-            Tìm kiếm
-        </button>
-    </div>
+    <form action="" method="get">
+        <div class="input-group mb-3">
+            <input type="text" name="keyword" class="form-control" placeholder="Nhập tên sản phẩm tìm kiếm..." aria-describedby="button-addon2" value="<?= $_GET['keyword'] ?? '' ?>">
+            <button class="btn btn-secondary" type="submit" id="button-addon2">
+                Tìm kiếm
+            </button>
+        </div>
+        <input type="hidden"> <!-- ngăn chuyển về trang chủ -->
+    </form>
     <table class="table table-bordered table-hover text-center align-middle">
     <thead class="table-dark">
             <tr>

@@ -18,10 +18,10 @@ class UserController extends Controller
         // if (empty($_SESSION['currentUser'])) return header("Location: ../user/signin");
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 2; // Số bản ghi mỗi trang
-
+        $keyword = $_GET['keyword'] ?? "";
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $customers = $this->userModel->getPaginated($page, $limit);
-        $totalUsers = $this->userModel->getTotal();
+        $customers = $this->userModel->getPaginated($page, $limit, $keyword);
+        $totalUsers = $this->userModel->getTotal($keyword);
 
         // Tính toán số trang
         $totalPages = ceil($totalUsers / $limit);

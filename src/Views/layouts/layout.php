@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>$pageTitle - Learning PHP</title>
+    <title><?= $pageTitle ?> - Learning PHP</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -52,22 +52,22 @@
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/') ? 'active' : 'link-dark'; ?>">
-                Người dùng
+        <a href="/" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/') ? 'active' : 'link-dark'; ?>">
+                Khách hàng
             </a>
         </li>
         <li class="nav-item">
-            <a href="/product" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/product') ? 'active' : 'link-dark'; ?>">
+        <a href="/product" class="nav-link <?= (strpos($_SERVER['REQUEST_URI'], '/product') === 0) ? 'active' : 'link-dark'; ?>">
                 Mặt hàng
             </a>
         </li>
         <li class="nav-item">
-            <a href="/category" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/category') ? 'active' : 'link-dark'; ?>">
+        <a href="/category" class="nav-link <?= (strpos($_SERVER['REQUEST_URI'], '/category') === 0) ? 'active' : 'link-dark'; ?>">
                 Loại hàng
             </a>
         </li>
         <li class="nav-item">
-            <a href="/employee" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/employee') ? 'active' : 'link-dark'; ?>">
+        <a href="/employee" class="nav-link <?= (strpos($_SERVER['REQUEST_URI'], '/employee') === 0) ? 'active' : 'link-dark'; ?>">
                 Nhân viên
             </a>
         </li>

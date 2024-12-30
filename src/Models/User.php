@@ -82,19 +82,19 @@ class User
         return $this->mysqli->query("SELECT * FROM provinces");
     }
 
-    public function getPaginated($page, $limit)
+    public function getPaginated($page, $limit, $keyword)
     {
         $offset = ($page - 1) * $limit;
-        $stmt = $this->mysqli->prepare("SELECT * FROM customers LIMIT ? OFFSET ?");
+        $stmt = $this->mysqli->prepare("SELECT * FROM customers WHERE CustomerName LIKE '%$keyword%' LIMIT ? OFFSET ?");
         $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getTotal()
+    public function getTotal($keyword)
     {
-        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM customers");
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM customers WHERE CustomerName LIKE '%$keyword%'");
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
         return $result['total'];

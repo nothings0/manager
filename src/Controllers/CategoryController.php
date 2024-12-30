@@ -20,10 +20,11 @@ class CategoryController extends Controller
         // $this->render('categories\index', ['categories' => $categories]);
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 2; // Số bản ghi mỗi trang
+        $keyword = $_GET['keyword'] ?? "";
 
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $customers = $this->categoryModel->getPaginated($page, $limit);
-        $totalUsers = $this->categoryModel->getTotal();
+        $customers = $this->categoryModel->getPaginated($page, $limit, $keyword);
+        $totalUsers = $this->categoryModel->getTotal($keyword);
 
         // Tính toán số trang
         $totalPages = ceil($totalUsers / $limit);

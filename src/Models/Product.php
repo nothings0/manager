@@ -23,25 +23,6 @@ class Product
         }
     }
 
-    public function getAllProducts()
-    {
-        // Nếu có tìm kiếm
-        if (!empty($_GET['keyword'])) {
-            $keyword = $this->mysqli->real_escape_string($_GET['keyword']);
-            $result = $this->mysqli->query("SELECT * FROM products WHERE ProductName LIKE '%$keyword%'");
-        }
-        else {
-            $result = $this->mysqli->query("SELECT * FROM products");
-        }
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-    
-    public function getCountProducts()
-    {
-        $result = $this->mysqli->query("SELECT * FROM products");
-        return $result->num_rows;
-    }
-
     public function getProductById($productId)
     {
         $productId = $this->mysqli->real_escape_string($productId);

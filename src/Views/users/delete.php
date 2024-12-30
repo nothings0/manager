@@ -11,10 +11,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Tỉnh/Thành</label>
-            <select name="province" class="form-select" aria-label="-- Chọn tỉnh/thành --">
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select disabled readonly name="province" class="form-select" aria-label="-- Chọn tỉnh/thành --">
+                <option value=""><?= $customer["Province"]; ?></option>
             </select>
         </div>
         <div class="mb-3">

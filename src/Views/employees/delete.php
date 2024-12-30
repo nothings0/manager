@@ -27,7 +27,7 @@
             </select>
         </div>
         <div class="d-flex gap-2 justify-content-end">
-            <a class="btn btn-default" href="/">Quay lại</a>
+            <a class="btn btn-default" href="/employee">Quay lại</a>
             <button class="btn btn-danger">Xóa</button>
         </div>
     </form>
