@@ -20,8 +20,8 @@ class UserController extends Controller
         $limit = 2; // Số bản ghi mỗi trang
 
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $customers = $this->userModel->getPaginatedUsers($page, $limit);
-        $totalUsers = $this->userModel->getTotalUsers();
+        $customers = $this->userModel->getPaginated($page, $limit);
+        $totalUsers = $this->userModel->getTotal();
 
         // Tính toán số trang
         $totalPages = ceil($totalUsers / $limit);

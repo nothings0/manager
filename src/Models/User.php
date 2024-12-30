@@ -85,7 +85,7 @@ class User
     public function getPaginated($page, $limit)
     {
         $offset = ($page - 1) * $limit;
-        $stmt = $this->mysqli->prepare("SELECT * FROM categories LIMIT ? OFFSET ?");
+        $stmt = $this->mysqli->prepare("SELECT * FROM customers LIMIT ? OFFSET ?");
         $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
         $stmt->execute();
         $result = $stmt->get_result();
@@ -94,7 +94,7 @@ class User
 
     public function getTotal()
     {
-        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM categories");
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM customers");
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
         return $result['total'];
