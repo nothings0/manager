@@ -18,27 +18,20 @@ class ProductController extends Controller
 
     public function index()
     {
-        // Fetch all products and display them in a view
-        // $products = $this->productModel->getAllProducts();
-
-        // $this->render('products\index', ['products' => $products]);
-
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $keyword = $_GET['keyword'] ?? "";
         $limit = 3; // Số bản ghi mỗi trang
 
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $products = $this->productModel->getPaginated($page, $limit);
-        $totalUsers = $this->productModel->getTotal();
+        $products = $this->productModel->getPaginated($page, $limit, $keyword);
+        $totalUsers = $this->productModel->getTotal($keyword);
 
         // Tính toán số trang
         $totalPages = ceil($totalUsers / $limit);
-
-        // Gửi dữ liệu tới view
-        $this->render('products/index', [
-            'products' => $products,
-            'totalPages' => $totalPages,
-            'currentPage' => $page
-        ]);
+        $pageTitle = 'Quản lý sản phẩm';
+        $this->render('products\index', ['products' => $products, 'pageTitle' => $pageTitle,
+        'totalPages' => $totalPages,
+        'currentPage' => $page]);
     }
 
     public function create()
@@ -47,6 +40,7 @@ class ProductController extends Controller
         //     header("Location: ../category/signin");
         //     exit();
         // }
+        $pageTitle = 'Thêm sản phẩm';
         // Handle form submission to create a new product
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Retrieve form data
@@ -86,7 +80,8 @@ class ProductController extends Controller
             $categories = $this->categoryModel->getAllCategories();
             $this->render('products\add', [
                 'product' => [],
-                'categories' => $categories
+                'categories' => $categories,
+                'pageTitle' => $pageTitle
             ]);
         }
     }
@@ -97,6 +92,7 @@ class ProductController extends Controller
         //     header("Location: ../category/signin");
         //     exit();
         // }
+        $pageTitle = 'Chỉnh sửa sản phẩm';
         // Handle form submission to update a product
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Retrieve form data
@@ -135,7 +131,8 @@ class ProductController extends Controller
             $categories = $this->categoryModel->getAllCategories();
             $this->render('products\edit', [
                 'product' => $product,
-                'categories' => $categories
+                'categories' => $categories,
+                'pageTitle' => $pageTitle
             ]);
         }
     }

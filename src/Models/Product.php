@@ -25,8 +25,21 @@ class Product
 
     public function getAllProducts()
     {
-        $result = $this->mysqli->query("SELECT * FROM products");
+        // Nếu có tìm kiếm
+        if (!empty($_GET['keyword'])) {
+            $keyword = $this->mysqli->real_escape_string($_GET['keyword']);
+            $result = $this->mysqli->query("SELECT * FROM products WHERE ProductName LIKE '%$keyword%'");
+        }
+        else {
+            $result = $this->mysqli->query("SELECT * FROM products");
+        }
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function getCountProducts()
+    {
+        $result = $this->mysqli->query("SELECT * FROM products");
+        return $result->num_rows;
     }
 
     public function getProductById($productId)
@@ -68,20 +81,19 @@ class Product
         $productId = $this->mysqli->real_escape_string($productId);
         $this->mysqli->query("DELETE FROM products WHERE ProductID=$productId");
     }
-
-    public function getPaginated($page, $limit)
+    public function getPaginated($page, $limit, $keyword)
     {
         $offset = ($page - 1) * $limit;
-        $stmt = $this->mysqli->prepare("SELECT * FROM products LIMIT ? OFFSET ?");
+        $stmt = $this->mysqli->prepare("SELECT * FROM products WHERE ProductName LIKE '%$keyword%' LIMIT ? OFFSET ?");
         $stmt->bind_param("ii", $limit, $offset); // Tránh SQL Injection
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getTotal()
+    public function getTotal($keyword)
     {
-        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM products");
+        $stmt = $this->mysqli->prepare("SELECT COUNT(*) AS total FROM products WHERE ProductName LIKE '%$keyword%'");
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
         return $result['total'];
