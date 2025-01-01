@@ -24,10 +24,10 @@ class ProductController extends Controller
 
         // Gọi model để lấy dữ liệu và tổng số bản ghi
         $products = $this->productModel->getPaginated($page, $limit, $keyword);
-        $totalUsers = $this->productModel->getTotal($keyword);
+        $total = $this->productModel->getTotal($keyword);
 
         // Tính toán số trang
-        $totalPages = ceil($totalUsers / $limit);
+        $totalPages = ceil($total / $limit);
         $pageTitle = 'Quản lý sản phẩm';
         $this->render('products\index', ['products' => $products, 'pageTitle' => $pageTitle,
         'totalPages' => $totalPages,
@@ -147,11 +147,13 @@ class ProductController extends Controller
             $this->productModel->deleteProduct($productId);
             header('Location: /product');    
         } else {
+            $pageTitle = "Xóa mặt hàng";
             $product = $this->productModel->getProductById($productId);
             $categories = $this->categoryModel->getAllCategories();
             $this->render('products\delete', [
                 'product' => $product,
-                'categories' => $categories
+                'categories' => $categories,
+                'pageTitle' => $pageTitle
             ]);
         }
     }

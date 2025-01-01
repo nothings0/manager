@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-    <h1>Thêm mới mặt hàng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label" for="">Tên mặt hàng</label>

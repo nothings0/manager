@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
     <div class="d-flex justify-content-between align-items-center my-2">
-        <h1>Quản lý khách hàng</h1>
+        <h1><?= $pageTitle ?></h1>
         <a href="/employee/create" class="my-2 btn btn-success">Thêm nhân viên</a>
     </div>
     <form action="" method="get">

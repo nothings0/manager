@@ -21,27 +21,18 @@ class UserController extends Controller
         $keyword = $_GET['keyword'] ?? "";
         // Gọi model để lấy dữ liệu và tổng số bản ghi
         $customers = $this->userModel->getPaginated($page, $limit, $keyword);
-        $totalUsers = $this->userModel->getTotal($keyword);
-
+        $total = $this->userModel->getTotal($keyword);
+        $pageTitle = 'Quản lý khách hàng';
         // Tính toán số trang
-        $totalPages = ceil($totalUsers / $limit);
+        $totalPages = ceil($total / $limit);
 
         // Gửi dữ liệu tới view
         $this->render('users/index', [
             'customers' => $customers,
             'totalPages' => $totalPages,
-            'currentPage' => $page
+            'currentPage' => $page,
+            'pageTitle' => $pageTitle
         ]);
-    }
-
-    public function show($userId)
-    {
-        //if (empty($_SESSION['currentUser'])) return header("Location: ../user/signin");
-        // Fetch a single user by ID and display in a view
-        $user = $this->userModel->getUserById($userId);
-        
-        $this->render('users\user-form', ['user' => $user]);
-
     }
 
     public function create()
@@ -50,10 +41,12 @@ class UserController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processForm();
         } else {
+            $pageTitle = 'Thêm mới khách hàng';
             $provinces = $this->userModel->getProvinces();
             $this->render('users\add', [
                 'user' => [],
-                'provinces' => $provinces
+                'provinces' => $provinces,
+                'pageTitle' => $pageTitle
             ]);
         }
     }
@@ -87,12 +80,14 @@ class UserController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processFormUpdate($userId);            
         } else {
+            $pageTitle = 'Cập nhật khách hàng';
             // Fetch the user data and display the form to update
             $customer = $this->userModel->getUserById($userId);       
             $provinces = $this->userModel->getProvinces();
             $this->render('users\edit', [
                 'customer' => $customer,
-                'provinces' => $provinces
+                'provinces' => $provinces,
+                'pageTitle' => $pageTitle
             ]);
         }
     }
@@ -128,10 +123,11 @@ class UserController extends Controller
             $this->userModel->deleteUser($userId);
             header('Location: /index.php');    
         } else {
+            $pageTitle = 'Xóa khách hàng';
             // Fetch the user data and display the form to update
             $customer = $this->userModel->getUserById($userId);       
             
-            $this->render('users\delete', ['customer' => $customer]);
+            $this->render('users\delete', ['customer' => $customer,'pageTitle' => $pageTitle]);
         }
     }
 }

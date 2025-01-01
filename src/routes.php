@@ -29,7 +29,6 @@ $router->addRoute('/\/auth\/validate/', [new AuthenticationController(), 'authen
 $router->addRoute('/\/auth\/logout/', [new AuthenticationController(), 'logout']);
 
 $router->addRoute('/\/category/', [new CategoryController(), 'index']);
-$router->addRoute('/\/category\/show\/(\d+)/', [new CategoryController(), 'show']);
 $router->addRoute('/\/category\/create/', [new CategoryController(), 'create']);
 $router->addRoute('/\/category\/update\/(\d+)/', [new CategoryController(), 'update']);
 $router->addRoute('/\/category\/delete\/(\d+)/', [new CategoryController(), 'delete']);

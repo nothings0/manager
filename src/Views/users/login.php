@@ -4,25 +4,20 @@
       <!-- Email input -->
        <h1 class="text-center mb-4">Đăng nhập</h1>
       <div data-mdb-input-init class="form-outline mb-4">
-          <label class="form-label" for="form2Example1">Email address</label>
+          <label class="form-label" for="form2Example1">Email</label>
         <input type="email" id="form2Example1" class="form-control" name="email"/>
       </div>
     
       <!-- Password input -->
       <div data-mdb-input-init class="form-outline mb-4">
-          <label class="form-label" for="form2Example2">Password</label>
+          <label class="form-label" for="form2Example2">Mật khẩu</label>
         <input type="password" id="form2Example2" class="form-control" name="password"/>
       </div>
     
       <!-- Submit button -->
        <div class="text-center">
-           <button type="submit" class="btn btn-primary mb-4">Sign in</button>
+           <button type="submit" class="btn btn-primary mb-4">Đăng nhập</button>
        </div>
-    
-      <!-- Register buttons -->
-      <div class="text-center">
-        <p>Not a member? <a href="#!">Register</a></p>
-      </div>
     </form>
 </div> 
 <?php $content = ob_get_clean(); ?>

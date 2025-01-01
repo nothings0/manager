@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?= $pageTitle ?> - Learning PHP</title>
+    <title><?= $pageTitle ?> - XManager</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -39,6 +39,12 @@
         background: #f8f9fa;
         margin: 0 -0.75rem;
         padding: 1rem;
+      }
+      .btn-default{
+        background: #f4f4f4;
+      }
+      .input-format{
+        text-align: left !important;
       }
     </style>
   </head>
@@ -123,9 +129,9 @@
           
         </div>
         <footer>
-            <strong>Copyright &copy; 2024 <a href="#">XTeam</a>.</strong>
-            All rights reserved.
-          </footer>
+          <strong>Copyright &copy; 2024 <a href="#">Group2</a>
+          </strong>
+        </footer>
       </div>
     </main>
 
@@ -134,30 +140,19 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js"></script>
     <script>
-      tinymce.init({
-        selector: "textarea",
-      });
-      document.querySelectorAll(".input-format").forEach((input) => {
-        // Định dạng khi người dùng nhập vào ô
-        input.addEventListener("input", function () {
-          formatNumber(this);
-        });
-
-        // Định dạng khi trang được tải (để hiển thị giá trị ban đầu đã format)
-        formatNumber(input);
-      });
-
-      function formatNumber(input) {
-        // Lấy giá trị của input, loại bỏ các ký tự không phải là số
-        let value = input.value.replace(/\D/g, "");
-        if (value) {
-          // Định dạng số với dấu phân cách hàng nghìn
-          value = parseInt(value).toLocaleString("en");
-        }
-        input.value = value; // Cập nhật lại giá trị vào ô input
-      }
+        $(document).ready(function () {
+            $('.input-format').inputmask({
+                alias: "numeric",
+                groupSeparator: ",",       // Dấu phẩy phân cách phần nghìn
+                autoGroup: true,           // Tự động thêm dấu phân cách
+                digits: 0,                 // Không có chữ số thập phân
+                removeMaskOnSubmit: true   // Loại bỏ ký tự phân cách phần nghìn khi submit form
+            });
+        })
+    </script>
     </script>
   </body>
 </html>

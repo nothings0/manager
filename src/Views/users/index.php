@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
     <div class="d-flex justify-content-between align-items-center my-2">
-        <h1>Quản lý khách hàng</h1>
+        <h1><?= $pageTitle ?></h1>
         <a href="/user/create" class="my-2 btn btn-success">Thêm khách hàng</a>
     </div>
     <form action="" method="get">
@@ -32,8 +32,8 @@
                 <td><?= htmlspecialchars($customer["Province"], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td>
                     <?= $customer["IsLocked"] == 1 
-                        ? '<span class="badge bg-danger">Đã khóa</span>' 
-                        : '<span class="badge bg-success">Hoạt động</span>'; 
+                        ? '<span class="badge bg-success">Hoạt động</span>' 
+                        : '<span class="badge bg-danger">Đã khóa</span>'; 
                     ?>
                 </td>
                 <td>

@@ -21,19 +21,20 @@ class CategoryController extends Controller
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 2; // Số bản ghi mỗi trang
         $keyword = $_GET['keyword'] ?? "";
-
+        $pageTitle = 'Quản lý loại hàng';
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $customers = $this->categoryModel->getPaginated($page, $limit, $keyword);
-        $totalUsers = $this->categoryModel->getTotal($keyword);
+        $categories = $this->categoryModel->getPaginated($page, $limit, $keyword);
+        $total = $this->categoryModel->getTotal($keyword);
 
         // Tính toán số trang
-        $totalPages = ceil($totalUsers / $limit);
+        $totalPages = ceil($total / $limit);
 
         // Gửi dữ liệu tới view
         $this->render('categories/index', [
-            'categories' => $customers,
+            'categories' => $categories,
             'totalPages' => $totalPages,
-            'currentPage' => $page
+            'currentPage' => $page,
+            'pageTitle' => $pageTitle
         ]);
     }
 
@@ -43,64 +44,60 @@ class CategoryController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processForm();
         } else {
-            // Display the form for creating a new category            
-            $this->render('categories\add', ['category' => []]);
+            $pageTitle = 'Thêm mới loại hàng';
+            $this->render('categories\add', ['category' => ['pageTitle' => $pageTitle]]);
         }
         
     }
 
     private function processForm(){
-            // Retrieve form data
             $categoryName = $_POST['categoryName'];
             $description = $_POST['description'];
 
-            // Call the model to create a new category
             $category = $this->categoryModel->createCategory($categoryName, $description);
 
             if ($category) {
-                // Redirect to the category list page or show a success message
-                header('Location: /category/index');
+                header('Location: /category');
                 exit();
             } else {
-                // Handle the case where the category creation failed
                 echo 'Category creation failed.';
             }
     }
-       
-
+    
     public function update($categoryId)
     {
         // if (empty($_SESSION['currentCategory'])) return header("Location: ../category/signin");
-        // Handle form submission to update a category
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processFormUpdate($categoryId);            
         } else {
-            // Fetch the category data and display the form to update
+            $pageTitle = 'Cập nhật loại hàng';
             $category = $this->categoryModel->getCategoryById($categoryId);       
             
-            $this->render('categories\edit', ['category' => $category]);
+            $this->render('categories\edit', ['category' => $category, 'pageTitle' => $pageTitle]);
 
         }
     }
     
-    private function processFormUpdate($categoryId){
-        // if (empty($_SESSION['currentCategory'])) return header("Location: ../category/signin");
-        // Retrieve form data
+    private function processFormUpdate($categoryId)
+    {
         $categoryName = $_POST['categoryName'];
         $description = $_POST['description'];
-        
-        // Call the model to update the category
-        $category = $this->categoryModel->updateCategory($categoryId, $categoryName, $description);
 
-        if ($category) {
-            // Redirect to the category list page or show a success message
-            header('Location: /category/index');
+        $result = $this->categoryModel->updateCategory($categoryId, $categoryName, $description);
+
+        if ($result === true) {
+            header('Location: /category');
             exit();
         } else {
-            // Handle the case where the category creation failed
-            echo 'Category update failed.';
+            $errorMessage = htmlspecialchars($result);
+            $category = ['CategoryID' => $categoryId, 'CategoryName' => $categoryName, 'Description' => $description];
+            $this->render('categories\edit', [
+                'category' => $category,
+                'error' => $errorMessage,
+            ]);
         }
     }
+
 
     public function delete($categoryId)
     {
@@ -110,10 +107,10 @@ class CategoryController extends Controller
             $this->categoryModel->deleteCategory($categoryId);
             header('Location: /category/index');    
         } else {
-            // Fetch the category data and display the form to update
+            $pageTitle = 'Xóa loại hàng';
             $category = $this->categoryModel->getCategoryById($categoryId);       
             
-            $this->render('categories\delete', ['category' => $category]);
+            $this->render('categories\delete', ['category' => $category, 'pageTitle' => $pageTitle]);
 
         }
     }

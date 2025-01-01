@@ -53,8 +53,15 @@ class Category
         $customerName = $this->mysqli->real_escape_string($customerName);
         $description = $this->mysqli->real_escape_string($description);
 
-        return $this->mysqli->query("UPDATE categories SET CategoryName='$customerName', Description='$description' WHERE CategoryID=$categoryId");
+        $query = "UPDATE categories SET CategoryName='$customerName', Description='$description' WHERE CategoryID=$categoryId";
+
+        if ($this->mysqli->query($query)) {
+            return true; // Thành công
+        } else {
+            return $this->mysqli->error; // Trả về lỗi
+        }
     }
+
 
     public function deleteCategory($categoryId)
     {

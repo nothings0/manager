@@ -34,7 +34,9 @@ class AuthenticationController extends Controller {
                 exit();
             }
         }else{
-            $this->render('users\login', []);
+            $pageTitle = 'Đăng nhập tài khoản';
+
+            $this->render('users\login', ['pageTitle' => $pageTitle]);
         }
     }
 

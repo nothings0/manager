@@ -1,5 +1,5 @@
 <?php ob_start(); ?>    
-    <h1>Thêm loại hàng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST">
         <div class="mb-3">
             <label class="form-label" for="">Tên loại hàng</label>

@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Quản lý mặt hàng</h1>
+        <h1><?= $pageTitle ?></h1>
         <a href="/product/create" class="btn btn-success">Thêm mặt hàng</a>
     </div>
     <form action="" method="get">
@@ -37,7 +37,7 @@
                     </td>
                     <td><?= htmlspecialchars($product['ProductName'], ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?= htmlspecialchars($product['ProductDescription'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?= number_format((float)$product['Price'], 2, '.', ','); ?></td>
+                    <td><?= number_format((float)$product['Price'], 0, '.', ','); ?></td>
                     <td>
                         <a href="/product/update/<?= $product['ProductID']; ?>" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i> Sửa

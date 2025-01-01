@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-    <h1>Xóa mặt hàng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST">
         <div class="mb-3">
             <label class="form-label" for="">Tên mặt hàng</label>
@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Giá bán</label>
-            <input disabled readonly type="text" name="price" class="form-control" placeholder="Giá bán..." value="<?= $product["Price"]; ?>">
+            <input disabled readonly type="text" name="price" class="form-control input-format" placeholder="Giá bán..." value="<?= $product["Price"]; ?>">
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>

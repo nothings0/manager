@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-    <h1>Cập nhật mặt hàng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label" for="">Tên mặt hàng</label>
@@ -28,8 +28,8 @@
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>
             <select name="isSelling" class="form-select">
-                <option value="0" <?= $product['IsSelling'] == 0 ? 'selected' : ''; ?>>Chưa kích hoạt</option>
-                <option value="1" <?= $product['IsSelling'] == 1 ? 'selected' : ''; ?>>Kích hoạt</option>
+                <option value="0" <?= $product['IsSelling'] == 0 ? 'selected' : ''; ?>>Đã khóa</option>
+                <option value="1" <?= $product['IsSelling'] == 1 ? 'selected' : ''; ?>>Hoạt động</option>
             </select>
         </div>
         <div class="mb-3">

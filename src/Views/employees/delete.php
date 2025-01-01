@@ -22,8 +22,8 @@
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>
             <select name="IsWorking" class="form-select" disabled readonly>
-                <option value="0" <?= $employee['IsWorking'] == 0 ? 'selected' : ''; ?>>Chưa kích hoạt</option>
-                <option value="1" <?= $employee['IsWorking'] == 1 ? 'selected' : ''; ?>>Kích hoạt</option>
+                <option value="0" <?= $employee['IsWorking'] == 0 ? 'selected' : ''; ?>>Đã khóa</option>
+                <option value="1" <?= $employee['IsWorking'] == 1 ? 'selected' : ''; ?>>Hoạt động</option>
             </select>
         </div>
         <div class="d-flex gap-2 justify-content-end">

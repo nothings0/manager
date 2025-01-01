@@ -1,5 +1,5 @@
 <?php ob_start(); ?>    
-    <h1>Thêm người dùng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST">
     <div class="mb-3">
             <label class="form-label" for="">Họ Tên</label>
@@ -27,8 +27,8 @@
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>
             <select name="isLocked" class="form-select">
-            <option value="0">Chưa kích hoạt</option>
-            <option value="1">Kích hoạt</option>
+            <option value="0">Đã khóa</option>
+            <option value="1">Hoạt động</option>
             </select>
         </div>
         <div class="d-flex gap-2 justify-content-end">

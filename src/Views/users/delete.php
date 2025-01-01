@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-    <h1>Xóa người dùng</h1>
+    <h1><?= $pageTitle ?></h1>
     <form action="" method="POST">
         <div class="mb-3">
             <label class="form-label" for="">Họ Tên</label>
@@ -22,8 +22,8 @@
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>
             <select name="isLocked" class="form-select" disabled readonly>
-                <option value="0" <?= $customer['IsLocked'] == 0 ? 'selected' : ''; ?>>Chưa kích hoạt</option>
-                <option value="1" <?= $customer['IsLocked'] == 1 ? 'selected' : ''; ?>>Kích hoạt</option>
+                <option value="0" <?= $customer['IsLocked'] == 0 ? 'selected' : ''; ?>>Đã khóa</option>
+                <option value="1" <?= $customer['IsLocked'] == 1 ? 'selected' : ''; ?>>Hoạt động</option>
             </select>
         </div>
         <div class="d-flex gap-2 justify-content-end">

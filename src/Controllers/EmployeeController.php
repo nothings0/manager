@@ -25,19 +25,20 @@ class EmployeeController extends Controller
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 2; // Số bản ghi mỗi trang
         $keyword = $_GET['keyword'] ?? "";
-
+        $pageTitle = 'Quản lý nhân viên';
         // Gọi model để lấy dữ liệu và tổng số bản ghi
-        $customers = $this->employeeModel->getPaginated($page, $limit, $keyword);
-        $totalUsers = $this->employeeModel->getTotal($keyword);
+        $employees = $this->employeeModel->getPaginated($page, $limit, $keyword);
+        $total = $this->employeeModel->getTotal($keyword);
 
         // Tính toán số trang
-        $totalPages = ceil($totalUsers / $limit);
+        $totalPages = ceil($total / $limit);
 
         // Gửi dữ liệu tới view
         $this->render('employees/index', [
-            'employees' => $customers,
+            'employees' => $employees,
             'totalPages' => $totalPages,
-            'currentPage' => $page
+            'currentPage' => $page,
+            'pageTitle' => $pageTitle
         ]);
     }
 
@@ -47,11 +48,13 @@ class EmployeeController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processForm();
         } else {
+            $pageTitle = 'Thêm mới nhân viên';
             $provinces = $this->userModel->getProvinces();
             // Display the form for creating a new employee            
             $this->render('employees\add', [
                 'employee' => [],
-                'provinces' => $provinces
+                'provinces' => $provinces,
+                'pageTitle' => $pageTitle
             ]);
         }
         
@@ -86,12 +89,14 @@ class EmployeeController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processFormUpdate($employeeId);            
         } else {
+            $pageTitle = 'Cập nhật nhân viên';
             // Fetch the employee data and display the form to update
             $employee = $this->employeeModel->getEmployeeById($employeeId);       
             $provinces = $this->userModel->getProvinces();
             $this->render('employees\edit', [
                 'employee' => $employee,
-                'provinces' => $provinces
+                'provinces' => $provinces,
+                'pageTitle' => $pageTitle
             ]);
 
         }
@@ -128,10 +133,11 @@ class EmployeeController extends Controller
             $this->employeeModel->deleteEmployee($employeeId);
             header('Location: /employee');    
         } else {
+            $pageTitle = 'Xóa nhân viên';
             // Fetch the employee data and display the form to update
             $employee = $this->employeeModel->getEmployeeById($employeeId);       
             
-            $this->render('employees\delete', ['employee' => $employee]);
+            $this->render('employees\delete', ['employee' => $employee, 'pageTitle' => $pageTitle]);
 
         }
     }
