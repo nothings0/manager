@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // $categories = $this->categoryModel->getAllCategories();
         // $this->render('categories\index', ['categories' => $categories]);
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = 2; // Số bản ghi mỗi trang
+        $limit = 5; // Số bản ghi mỗi trang
         $keyword = $_GET['keyword'] ?? "";
         $pageTitle = 'Quản lý loại hàng';
         // Gọi model để lấy dữ liệu và tổng số bản ghi

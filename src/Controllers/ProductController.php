@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $keyword = $_GET['keyword'] ?? "";
-        $limit = 3; // Số bản ghi mỗi trang
+        $limit = 5; // Số bản ghi mỗi trang
 
         // Gọi model để lấy dữ liệu và tổng số bản ghi
         $products = $this->productModel->getPaginated($page, $limit, $keyword);

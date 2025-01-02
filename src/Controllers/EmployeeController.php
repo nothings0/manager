@@ -23,7 +23,7 @@ class EmployeeController extends Controller
         // $this->render('employees\index', ['employees' => $employees]);
 
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = 2; // Số bản ghi mỗi trang
+        $limit = 5; // Số bản ghi mỗi trang
         $keyword = $_GET['keyword'] ?? "";
         $pageTitle = 'Quản lý nhân viên';
         // Gọi model để lấy dữ liệu và tổng số bản ghi
