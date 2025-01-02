@@ -13,6 +13,7 @@ class AuthenticationController extends Controller {
     }
 
     public function login(){
+        echo $_SERVER['REQUEST_METHOD'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -35,8 +36,10 @@ class AuthenticationController extends Controller {
             }
         }else{
             $pageTitle = 'Đăng nhập tài khoản';
-
-            $this->render('users\login', ['pageTitle' => $pageTitle]);
+            if (!empty($_SESSION['currentUser'])){
+                header('Location: /');
+            }
+            $this->render('auth\login', ['pageTitle' => $pageTitle]);
         }
     }
 
