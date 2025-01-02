@@ -1,28 +1,9 @@
 <?php
-
 namespace App\Models;
-//require_once(__DIR__ . '/../../config.php');
+use System\Core\Model;
 
-class Product
+class Product extends Model
 {
-    private $mysqli;
-
-    public function __construct()
-    {
-        // Replace these values with your actual database configuration
-        $host = DB_HOST;
-        $username = DB_USER;
-        $password = DB_PASSWORD;
-        $database = DB_NAME;
-
-        $this->mysqli = new \mysqli($host, $username, $password, $database);
-
-        // Check mysqli
-        if ($this->mysqli->connect_error) {
-            die("Connection failed: " . $this->mysqli->connect_error);
-        }
-    }
-
     public function getProductById($productId)
     {
         $productId = $this->mysqli->real_escape_string($productId);
