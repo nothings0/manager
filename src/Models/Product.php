@@ -53,7 +53,9 @@ class Product
         $isSelling = $this->mysqli->real_escape_string($isSelling);
         $categoryID = $this->mysqli->real_escape_string($categoryID);
         
-
+        if (!empty($photo)) {
+            return $this->mysqli->query("UPDATE products SET ProductName='$productName', ProductDescription='$productDescription', Price='$price', Photo='$photo', IsSelling='$isSelling', CategoryID='$categoryID' WHERE ProductID=$productId");
+        }
         return $this->mysqli->query("UPDATE products SET ProductName='$productName', ProductDescription='$productDescription', Price='$price', Photo='$photo', IsSelling='$isSelling', CategoryID='$categoryID' WHERE ProductID=$productId");
     }
 
