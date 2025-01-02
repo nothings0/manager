@@ -30,8 +30,7 @@
                 <tr>
                     <td><?= $product["ProductID"] ?></td>
                     <td>
-                    <img src="<?= htmlspecialchars($product['Photo'] ? '/public/images/' . htmlspecialchars($product['Photo'], ENT_QUOTES, 'UTF-8') : '/public/images/nophoto.png', ENT_QUOTES, 'UTF-8'); ?>" 
-                        alt="<?= htmlspecialchars($product['ProductName'], ENT_QUOTES, 'UTF-8'); ?>" 
+                    <img src="<?= htmlspecialchars(!empty($product['Photo']) && file_exists(APPROOT.'\public\images\\'.$product['Photo']) ? '/public/images/' . htmlspecialchars($product['Photo'], ENT_QUOTES, 'UTF-8') : '/public/images/nophoto.png', ENT_QUOTES, 'UTF-8'); ?>" 
                         class="rounded img-thumbnail" 
                         style="width: 60px; height: 60px;">
                     </td>
