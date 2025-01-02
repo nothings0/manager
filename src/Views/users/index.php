@@ -15,7 +15,7 @@
     <table class="table table-bordered table-hover text-center align-middle">
     <thead class="table-dark">
             <tr>
-                <th width="5%">STT</th>
+                <th width="5%">#</th>
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Tỉnh/Thành</th>

@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <div class="container d-flex align-item-center justify-content-center" style="min-height: calc(100vh - var(--header))">
-    <form class="my-4" style="width: 400px" method="post">
+    <form class="my-4 login_form" method="post">
       <!-- Email input -->
        <h1 class="text-center mb-4">Đăng nhập</h1>
       <div data-mdb-input-init class="form-outline mb-4">

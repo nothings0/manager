@@ -66,7 +66,13 @@ class Category
     public function deleteCategory($categoryId)
     {
         $categoryId = $this->mysqli->real_escape_string($categoryId);
-        $this->mysqli->query("DELETE FROM categories WHERE CategoryID=$categoryId");
+        $query = "DELETE FROM categories WHERE CategoryID=$categoryId";
+
+        if ($this->mysqli->query($query)) {
+            return true; // Thành công
+        } else {
+            return false; // Trả về lỗi
+        }
     }
 
     public function getPaginated($page, $limit, $keyword)

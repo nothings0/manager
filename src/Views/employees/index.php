@@ -15,7 +15,7 @@
     <table class="table table-bordered table-hover text-center align-middle">
     <thead class="table-dark">
             <tr>
-                <th width="5%">STT</th>
+                <th width="5%">#</th>
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Tỉnh/Thành</th>
@@ -26,7 +26,7 @@
         <tbody>
         <?php foreach ($employees as $index => $employee): ?>
             <tr>
-                <td><?= $index + 1; ?></td>
+                <td><?= $employee["EmployeeID"] ?></td>
                 <td><?= htmlspecialchars($employee["EmployeeName"], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><?= htmlspecialchars($employee["Email"], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><?= htmlspecialchars($employee["Province"], ENT_QUOTES, 'UTF-8'); ?></td>

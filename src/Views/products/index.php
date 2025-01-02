@@ -28,7 +28,7 @@
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $index => $product): ?>
                 <tr>
-                    <td><?= $index + 1; ?></td>
+                    <td><?= $product["ProductID"] ?></td>
                     <td>
                     <img src="<?= htmlspecialchars($product['Photo'] ? '/public/images/' . htmlspecialchars($product['Photo'], ENT_QUOTES, 'UTF-8') : '/public/images/nophoto.png', ENT_QUOTES, 'UTF-8'); ?>" 
                         alt="<?= htmlspecialchars($product['ProductName'], ENT_QUOTES, 'UTF-8'); ?>" 

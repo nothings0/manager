@@ -46,6 +46,15 @@
       .input-format{
         text-align: left !important;
       }
+      .login_form{
+        width: 400px;
+        height: 320px;
+        background: #f4f4f4;
+        padding: 10px;
+      }
+      .error{
+        color: red;
+      }
     </style>
   </head>
 
@@ -102,6 +111,7 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="userDropdown"
               >
+                <li class="dropdown-item"><?= $_SESSION['currentUser']['EmployeeName'] ?></li>
                 <li><a class="dropdown-item" href="/account">Tài khoản</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>

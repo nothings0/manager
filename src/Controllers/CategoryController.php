@@ -45,23 +45,33 @@ class CategoryController extends Controller
             $this->processForm();
         } else {
             $pageTitle = 'Thêm mới loại hàng';
-            $this->render('categories\add', ['category' => ['pageTitle' => $pageTitle]]);
+            $this->render('categories\add', ['category' => [], 'pageTitle' => $pageTitle]);
         }
         
     }
 
     private function processForm(){
-            $categoryName = $_POST['categoryName'];
-            $description = $_POST['description'];
+        $categoryName = $_POST['categoryName'];
+        $description = $_POST['description'];
 
-            $category = $this->categoryModel->createCategory($categoryName, $description);
+        if(!$categoryName || !$description) {
+            $error = 'Vui lòng điền đầy đủ thông tin';
+            $pageTitle = 'Thêm mới loại hàng';
+            return $this->render('categories\add', [
+                'category' => [],
+                'error' => $error,
+                'pageTitle' => $pageTitle
+            ]);
+        }
 
-            if ($category) {
-                header('Location: /category');
-                exit();
-            } else {
-                echo 'Category creation failed.';
-            }
+        $category = $this->categoryModel->createCategory($categoryName, $description);
+
+        if ($category) {
+            header('Location: /category');
+            exit();
+        } else {
+            echo 'Category creation failed.';
+        }
     }
     
     public function update($categoryId)
@@ -83,18 +93,24 @@ class CategoryController extends Controller
         $categoryName = $_POST['categoryName'];
         $description = $_POST['description'];
 
+        if(!$categoryName || !$description) {
+            $error = 'Vui lòng điền đầy đủ thông tin';
+            $pageTitle = 'Cập nhật loại hàng';
+            $category = $this->categoryModel->getCategoryById($categoryId);  
+            return $this->render('categories\edit', [
+                'category' => $category,
+                'error' => $error,
+                'pageTitle' => $pageTitle
+            ]);
+        }
+
         $result = $this->categoryModel->updateCategory($categoryId, $categoryName, $description);
 
         if ($result === true) {
             header('Location: /category');
             exit();
         } else {
-            $errorMessage = htmlspecialchars($result);
-            $category = ['CategoryID' => $categoryId, 'CategoryName' => $categoryName, 'Description' => $description];
-            $this->render('categories\edit', [
-                'category' => $category,
-                'error' => $errorMessage,
-            ]);
+            echo 'Category update failed.';
         }
     }
 
@@ -109,9 +125,7 @@ class CategoryController extends Controller
         } else {
             $pageTitle = 'Xóa loại hàng';
             $category = $this->categoryModel->getCategoryById($categoryId);       
-            
             $this->render('categories\delete', ['category' => $category, 'pageTitle' => $pageTitle]);
-
         }
     }
 }

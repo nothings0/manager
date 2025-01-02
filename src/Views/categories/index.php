@@ -15,7 +15,7 @@
     <table class="table table-bordered table-hover text-center align-middle">
     <thead class="table-dark">
             <tr>
-                <th width="5%">STT</th>
+                <th width="5%">#</th>
                 <th>Tên loại hàng</th>
                 <th>Mô tả</th>
                 <th width="15%">Thao tác</th>
@@ -24,7 +24,7 @@
         <tbody>
         <?php foreach ($categories as $index => $category): ?>
             <tr>
-                <td><?= $index + 1; ?></td>
+                <td><?= $category["CategoryID"] ?></td>
                 <td><?= htmlspecialchars($category["CategoryName"], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><?= htmlspecialchars($category["Description"], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td>
