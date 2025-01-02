@@ -12,14 +12,6 @@
 
 ### php -S localhost:8000
 
-# Chưa làm
-
-### 1. Phân quyền (role admin mới có quyền thêm sửa xóa user|employee)
-
-#### role empployee|admin mới vào được trang (default về trang /auth/login)
-
-### 2. Đổi mật khẩu
-
 # Phân việc
 
 ## Nhân: Module User

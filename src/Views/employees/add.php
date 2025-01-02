@@ -22,7 +22,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Địa chỉ</label>
-            <input type="text" name="address" class="form-control" placeholder="Mật khẩu...">
+            <input type="text" name="address" class="form-control" placeholder="Địa chỉ...">
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>
@@ -31,6 +31,7 @@
             <option value="1">Đã nghỉ việc</option>
             </select>
         </div>
+        <p class="error"><?= $error ?? '' ?></p>
         <div class="d-flex gap-2 justify-content-end">
             <a class="btn btn-default" href="/employee">Quay lại</a>
             <button class="btn btn-primary">Thêm mới</button>

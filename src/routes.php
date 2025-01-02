@@ -26,6 +26,7 @@ $router->addAuthRoute('/\/user\/delete\/(\d+)/', [new UserController(), 'delete'
 
 $router->addRoute('/\/auth\/login/', [new AuthenticationController(), 'login']);
 $router->addRoute('/\/auth\/validate/', [new AuthenticationController(), 'authenticate']);
+$router->addRoute('/\/403/', [new AuthenticationController(), 'accessdenined']);
 $router->addAuthRoute('/\/auth\/logout/', [new AuthenticationController(), 'logout']);
 
 $router->addAuthRoute('/\/category/', [new CategoryController(), 'index']);

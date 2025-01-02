@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Địa chỉ</label>
-            <input type="text" name="address" class="form-control" placeholder="Mật khẩu..." value="<?= $employee["Address"]; ?>">
+            <input type="text" name="address" class="form-control" placeholder="Địa chỉ..." value="<?= $employee["Address"]; ?>">
         </div>
         <div class="mb-3">
             <label class="form-label" for="">Trạng thái</label>

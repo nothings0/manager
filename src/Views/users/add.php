@@ -31,6 +31,7 @@
             <option value="1">Hoạt động</option>
             </select>
         </div>
+        <p class="error"><?= $error ?? '' ?></p>
         <div class="d-flex gap-2 justify-content-end">
             <a class="btn btn-default" href="/">Quay lại</a>
             <button class="btn btn-primary">Thêm mới</button>

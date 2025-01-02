@@ -36,6 +36,7 @@
             <input type="file" id="photo" name="photo" class="form-control" placeholder="Chọn ảnh" accept="image/*" onchange="previewImage(event)">
             <img id="preview" src="" alt="Xem trước ảnh" class="mt-3 mx-auto" style="max-width: 200px; display: none;">
         </div>
+        <p class="error"><?= $error ?? '' ?></p>
         <div class="d-flex gap-2 justify-content-end">
             <a class="btn btn-default" href="/product">Quay lại</a>
             <button class="btn btn-primary">Thêm</button>

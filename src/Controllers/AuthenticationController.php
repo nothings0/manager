@@ -29,7 +29,7 @@ class AuthenticationController extends Controller {
                 exit();
             } else {
                 // Authentication failed, redirect to signin.php
-                $_SESSION['flash_message'] = "Login has failed";
+                $_SESSION['flash_message'] = "Đăng nhập thất bại";
                 header("Location: /auth/login");
                 exit();
             }
@@ -38,6 +38,10 @@ class AuthenticationController extends Controller {
 
             $this->render('users\login', ['pageTitle' => $pageTitle]);
         }
+    }
+    public function accessdenined(){
+        $pageTitle = 'Không có quyền truy cập';
+        $this->render('layouts\403', ['pageTitle' => $pageTitle]);
     }
 
     public function logout(){

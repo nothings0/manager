@@ -59,6 +59,16 @@ class UserController extends Controller
         $address = $_POST['address'];
         $province = $_POST['province'];
 
+        if(!$customerName || !$isLocked || !$email || !$address || !$province) {
+            $error = 'Vui lòng điền đầy đủ thông tin';
+            $pageTitle = 'Thêm mới khách hàng';
+            return $this->render('users\add', [
+                'user' => [],
+                'error' => $error,
+                'pageTitle' => $pageTitle
+            ]);
+        }
+
         // Call the model to create a new user
         $user = $this->userModel->createUser($customerName, $email, $address, $province, $isLocked);
 

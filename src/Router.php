@@ -73,7 +73,7 @@ class Router {
         if($_SESSION['currentUser']['Role'] == 'Admin'){
             return true;
         }else{
-            header('Location: /');
+            header('Location: /403');
             exit();
         }
     }

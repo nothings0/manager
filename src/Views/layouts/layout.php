@@ -67,7 +67,7 @@
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-        <a href="/" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/') ? 'active' : 'link-dark'; ?>">
+        <a href="/" class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/' || strpos($_SERVER['REQUEST_URI'], '/user') === 0) ? 'active' : 'link-dark'; ?>">
                 Khách hàng
             </a>
         </li>

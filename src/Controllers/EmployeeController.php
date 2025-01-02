@@ -68,6 +68,16 @@ class EmployeeController extends Controller
             $address = $_POST['address'];
             $province = $_POST['province'];
 
+            if(!$email || !$isWoking || !$employeeName || !$address || !$province) {
+                $error = 'Vui lòng điền đầy đủ thông tin';
+                $pageTitle = 'Thêm mới nhân viên';
+                return $this->render('employees\add', [
+                    'employee' => [],
+                    'error' => $error,
+                    'pageTitle' => $pageTitle
+                ]);
+            }
+
             // Call the model to create a new employee
             $employee = $this->employeeModel->createEmployee($employeeName, $email, $address, $province, $isWoking);
 

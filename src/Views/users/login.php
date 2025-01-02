@@ -5,7 +5,7 @@
        <h1 class="text-center mb-4">Đăng nhập</h1>
       <div data-mdb-input-init class="form-outline mb-4">
           <label class="form-label" for="form2Example1">Email</label>
-        <input type="email" id="form2Example1" class="form-control" name="email"/>
+        <input type="email" id="form2Example1" class="form-control" name="email" autofocus/>
       </div>
     
       <!-- Password input -->
@@ -13,7 +13,7 @@
           <label class="form-label" for="form2Example2">Mật khẩu</label>
         <input type="password" id="form2Example2" class="form-control" name="password"/>
       </div>
-    
+      <p class="error"><?= $_SESSION['flash_message'] ?? '' ?></p>
       <!-- Submit button -->
        <div class="text-center">
            <button type="submit" class="btn btn-primary mb-4">Đăng nhập</button>

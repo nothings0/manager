@@ -50,6 +50,15 @@ class ProductController extends Controller
             $isSelling = $_POST['isSelling'];
             $categoryID = $_POST['categoryID'];
 
+            if(!$productName || !$productDescription || !$price || !$isSelling || !$categoryID) {
+                $error = 'Vui lòng điền đầy đủ thông tin';
+                $pageTitle = 'Thêm mới mặt hàng';
+                return $this->render('products\add', [
+                    'product' => [],
+                    'error' => $error,
+                    'pageTitle' => $pageTitle
+                ]);
+            }
             // Handle file upload
             $photo = '';
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -101,7 +110,7 @@ class ProductController extends Controller
             $price = $_POST['price'];
             $isSelling = $_POST['isSelling'];
             $categoryID = $_POST['categoryID'];
-            
+
             $photo = '';
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = __DIR__ . '/../../public/images/';
